@@ -1,0 +1,196 @@
+# set mod key to super ("windows key")
+set $mod Mod4
+
+# font for bar and window titles
+font pango:LinLibertine Bold 10 
+
+# start applets
+exec --no-startup-id nm-applet
+exec redshift-gtk
+
+# start compositor 
+exec_always picom
+
+# drag floating windows with mouse+mod
+floating_modifier $mod
+
+# increase/decrease volume
+bindsym $mod+Shift+plus		exec amixer sset 'Master' 5%+ && notify-send "volume +5%"
+bindsym $mod+Shift+minus	exec amixer sset 'Master' 5%- && notify-send "volume -5%"
+
+# start a terminal
+bindsym $mod+Return			exec alacritty 
+bindsym $mod+Shift+Return	exec alacritty --class "floatTerm"
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# rofi menu
+bindsym $mod+d exec rofi -show run -icon-theme "Papirus" -show-icons
+
+# gaps
+gaps inner 4
+gaps outer 2
+
+bindsym $mod+plus	gaps outer current plus 5
+bindsym $mod+minus	gaps outer current minus 5
+
+bindsym $mod+bracketright	gaps inner current plus 5
+bindsym $mod+bracketleft	gaps inner current minus 5
+
+bindsym $mod+BackSpace			gaps inner current set 4
+bindsym $mod+Shift+BackSpace	gaps outer current set 2
+
+# change focus
+bindsym $mod+h			focus left
+bindsym $mod+j			focus down
+bindsym $mod+k			focus up
+bindsym $mod+l			focus right
+bindsym $mod+Left		focus left
+bindsym $mod+Down		focus down
+bindsym $mod+Up			focus up
+bindsym $mod+Right		focus right
+
+# move focused window
+bindsym $mod+Shift+h			move left
+bindsym $mod+Shift+j			move down
+bindsym $mod+Shift+k			move up
+bindsym $mod+Shift+l			move right
+bindsym $mod+Shift+Left			move left
+bindsym $mod+Shift+Down			move down
+bindsym $mod+Shift+Up			move up
+bindsym $mod+Shift+Right		move right
+
+# split horizontal/vertical orientation
+bindsym $mod+g split h
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout 
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# workspaces
+set $ws1 "1: Primary"
+set $ws2 "2:   Browser"
+set $ws3 "3:   Internet"
+set $ws4 "4:   Files"
+set $ws5 "5:   Communication "
+set $ws6 "6:   Terminals"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# move workspaces between screens 
+bindsym $mod+p move workspace to output right
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# resize mode 
+bindsym $mod+r mode "resize"
+mode "resize" {
+        bindsym h			resize shrink 	width	10 px or 10 ppt
+        bindsym j			resize grow		height	10 px or 10 ppt
+        bindsym k			resize shrink	height	10 px or 10 ppt
+        bindsym l			resize grow		width	10 px or 10 ppt
+        bindsym Left		resize shrink	width	10 px or 10 ppt
+        bindsym Down		resize grow		height	10 px or 10 ppt
+        bindsym Up			resize shrink	height	10 px or 10 ppt
+        bindsym Right		resize grow		width	10 px or 10 ppt
+
+        # exit mode
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+
+# status bar
+bar {
+	# applet tray
+	tray_output DVI-D-0
+	
+	# commands
+	i3bar_command i3bar --transparency	
+	status_command i3blocks
+
+	# styling
+	height 25
+	workspace_min_width 80
+	separator_symbol " :||: "
+
+	# colors
+	colors {
+       	background	#2f3534b0
+		statusline	#4eb6c4
+		separator	#ed63e1
+
+							#border		background	text
+		focused_workspace	#2f3534c0	#f04d7ac0	#ffffffc0
+		inactive_workspace	#2f3534d0	#222222d0	#888888d0
+		urgent_workspace	#2f343ac0	#2fd6b5c0	#ffffffc0
+		binding_mode		#2f343ac0	#900000c0	#ffffffc0
+    	}
+}
+
+# set keyboard auto-repeat rate 
+exec_always xset r rate 300 50
+
+# keybinds
+bindsym $mod+x exec i3lock -i ~/.config/wall.png -t
+bindsym $mod+c exec maim -s ~/capture-$(date +%s).png 
+bindsym $mod+y exec mpv /dev/video0 --no-cache --profile=low-latency --untimed --no-osc --x11-name=webcam
+bindsym $mod+m exec mpv $(xclip -o) --cache=yes 
+bindsym $mod+t exec killall screenkey || screenkey &
+bindsym $mod+b exec brave 
+
+# floating windows
+for_window [class="mpv" instance="webcam$"] floating toggle
+for_window [class="Alacritty" instance="floatTerm$"] floating toggle
+for_window [class="Gnome-calculator"] floating enable
+
+# window borders
+					#border		background	text		indicator	child border
+client.focused		#a39c13		#285577		#ffffff		#e0861f		#a39c13
+client.unfocused	#316d9b		#222222		#888888		#292d2e		#316d9b
+
+# set wallpaper
+exec xwallpaper --zoom ~/.config/wall.png
+
+# restore last pywal scheme 
+exec wal -R

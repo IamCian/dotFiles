@@ -1,0 +1,52 @@
+[name]
+command=echo $USER@$(hostname)
+label=  
+interval=once
+
+[uptime]
+command=uptime -p
+interval=60
+
+[volume]
+command=sb-volume
+label= 
+interval=60
+
+[memory]
+command=sb-memory
+label= 
+interval=20
+
+[cpu]
+command=sb-cpu -t 5 -l  
+markup=pango
+interval=persist
+
+[temperature]
+command=sb-temperature
+label=  
+interval=10
+
+[bandwidth]
+command=sb-bandwidth -B -s -t 5
+label= 
+markup=pango
+interval=persist
+
+[ip]
+command=hostname -i
+interval=once
+
+[day]
+command=date +%a
+label= 
+interval=once
+
+[date]
+command=date +%d/%m/%y
+interval=once
+
+[time]
+command=date +%T
+label= 
+interval=5
