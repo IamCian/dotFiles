@@ -1,9 +1,6 @@
 # set mod key to super ("windows key")
 set $mod Mod4
 
-# font for bar and window titles
-font pango:LinLibertine Bold 10 
-
 # start applets
 exec --no-startup-id nm-applet
 exec redshift-gtk
@@ -142,6 +139,9 @@ mode "resize" {
 
 # status bar
 bar {
+	# font
+	font pango:LinLibertine Bold 10
+
 	# applet tray
 	tray_output DVI-D-0
 	
@@ -185,9 +185,14 @@ for_window [class="Alacritty" instance="floatTerm$"] floating toggle
 for_window [class="Gnome-calculator"] floating enable
 
 # window borders
-					#border		background	text		indicator	child border
-client.focused		#a39c13		#285577		#ffffff		#e0861f		#a39c13
-client.unfocused	#316d9b		#222222		#888888		#292d2e		#316d9b
+font pango:LinLibertine 0
+for_window [class=".*"] border normal 0
+
+						#border		background	text		indicator	child border
+client.focused			#a39c13		#a38c13		#a38c13		#a39c13		#a39c13
+client.unfocused		#316d9b		#316d9b		#316d9b		#316d9b		#316d9b		
+client.focused_inactive	#316d9b		#316d9b		#316d9b		#316d9b		#316d9b		
+client.urgent			#2f343a		#2f343a		#2f343a		#2f343a		#2f343a
 
 # set wallpaper
 exec xwallpaper --zoom ~/.config/wall.png
