@@ -180,8 +180,8 @@ bindsym $mod+t exec killall screenkey || screenkey &
 bindsym $mod+b exec brave 
 
 # floating windows
+for_window [class="floatTerm"] floating toggle
 for_window [class="mpv" instance="webcam$"] floating toggle
-for_window [class="Alacritty" instance="floatTerm$"] floating toggle
 for_window [class="Gnome-calculator"] floating enable
 
 # window borders
