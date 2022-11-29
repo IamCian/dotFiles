@@ -1,0 +1,35 @@
+" use ~/.config/vim, see https://vi.stackexchange.com/a/20067
+set runtimepath+=~/.config/vim
+set viminfo+=n~/.config/vim/viminfo
+
+" double-tap 'j' to enter normal mode
+inoremap jj <Esc>
+
+" display 
+syntax on
+set number
+set nowrap
+
+" indentation
+set autoindent
+set tabstop=4
+set shiftwidth=4
+
+set incsearch
+set scrolloff=8
+
+" use local modified colorscheme
+colorscheme slate_mod
+
+" allow for creating of PDFs with syntax highlighting, via 'HardcopyPdf'
+" command, see: https://askubuntu.com/a/1177135
+command! -range=% HardcopyPdf <line1>,<line2> hardcopy > %.ps | !ps2pdf %.ps && rm %.ps
+
+" de-clutter
+set noswapfile
+set nobackup
+set noundofile
+
+" recognise custom file extensions
+autocmd	BufNewFile,BufRead *.trf set syntax=nroff
+autocmd BufNewFile,BufRead *.mail set syntax=mail
