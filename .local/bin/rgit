@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# login
+USER=root
+HOST=cianb.xyz
+
+# git dir
+DIR=/var/www/git.cianb.xyz
+
+# init script
+SCRIPT="cd $DIR; sudo -u git mkdir $1; sudo -u git git init $1 --bare"
+
+# login and run
+ssh $USER@$HOST $SCRIPT
+
+# add remote
+git remote add origin git@$HOST:$DIR/$1
