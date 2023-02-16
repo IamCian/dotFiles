@@ -11,9 +11,13 @@ exec_always picom
 # drag floating windows with mouse+mod
 floating_modifier $mod
 
-# increase/decrease volume
-bindsym $mod+plus	exec amixer sset 'Master' 5%+ && notify-send "volume +5%"
-bindsym $mod+minus	exec amixer sset 'Master' 5%- && notify-send "volume -5%"
+# volumes
+bindsym $mod+plus	exec amixer set Master	5%+ && notify-send " $(gvol) (+5%)"
+bindsym $mod+minus	exec amixer set Master	5%- && notify-send " $(gvol) (-5%)"
+bindsym $mod+Shift+plus		exec amixer set Capture	5%+ && notify-send "  $(gvol Capture) (+5%)"
+bindsym $mod+Shift+minus	exec amixer set Capture	5%- && notify-send "  $(gvol Capture) (-5%)"
+bindsym $mod+backslash			exec amixer set Master	toggle && notify-send " $(gvol)"
+bindsym $mod+Shift+backslash	exec amixer set Capture	toggle && notify-send " $(gvol Capture)"
 
 # start a terminal
 bindsym $mod+Return			exec alacritty 
@@ -30,7 +34,7 @@ gaps outer 2
 gaps inner 4
 bindsym $mod+bracketright	gaps inner current plus 5
 bindsym $mod+bracketleft	gaps inner current minus 5
-bindsym $mod+BackSpace			gaps inner current set 4
+bindsym $mod+BackSpace		gaps inner current set 4
 
 # change focus
 bindsym $mod+h			focus left

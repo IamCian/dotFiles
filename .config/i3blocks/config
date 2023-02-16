@@ -7,10 +7,15 @@ interval=once
 command=uptime -p
 interval=60
 
-[volume]
-command=sb-volume
+[speaker volume]
+command=gvol
 label= 
-interval=60
+interval=10
+
+[mic volume]
+command=gvol Capture
+label= 
+interval=10
 
 [memory]
 command=sb-memory
