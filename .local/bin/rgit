@@ -7,8 +7,14 @@ HOST=cianb.xyz
 # git dir
 DIR=/var/www/git.cianb.xyz
 
+# description
+read -p "Description: " DESC
+
 # init script
-SCRIPT="cd $DIR; sudo -u git mkdir $1; sudo -u git git init $1 --bare"
+SCRIPT="cd $DIR;\
+	sudo -u git mkdir $1;\
+	sudo -u git git init $1 --bare;\
+	echo $DESC > $1/description;"
 
 # login and run
 ssh $USER@$HOST $SCRIPT
