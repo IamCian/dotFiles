@@ -1,19 +1,11 @@
 #!/bin/sh
 # gvol - get volume of alsa control using amixer, with $1 as the control name,
-# defaults to Master if blank
+# defaulting to Master if blank
 
-if [ $# == 1 ]
-then
-	CONTROL=$1 
-else
-	CONTROL=Master 
-fi
+[ -z "$1" ] && CONTROL=Master || CONTROL="$1"
 
-VOL=$(amixer get $CONTROL | grep Left:)
+VOL=$(amixer get $CONTROL | grep -m1 "%")
 
-if [ $(echo $VOL | awk '{print $6}') == "[off]" ]
-then
-	echo MUTE
-else
-	echo $(echo $VOL | awk '{print $5}' | tr -d [])
-fi
+[ $(grep -Fo "[on]" <<< "$VOL") ] \
+	&& grep -o "[0-9]*%" <<< "$VOL" \
+	|| echo MUTE
