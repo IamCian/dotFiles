@@ -2,10 +2,7 @@
 # gvol - get volume of alsa control using amixer, with $1 as the control name,
 # defaulting to Master if blank
 
-[ -z "$1" ] && CONTROL=Master || CONTROL="$1"
-
-VOL=$(amixer get $CONTROL | grep -m1 "%")
-
-[ $(grep -Fo "[on]" <<< "$VOL") ] \
-	&& grep -o "[0-9]*%" <<< "$VOL" \
-	|| echo MUTE
+amixer get \
+	$( [ -z "$1" ] && echo "Master" || echo "$1") \
+	| sed	-e '/\[on\]/	{ s/\].*//; s/.*\[//;	p; q }' \
+			-e '/\[off\]/	{ s/^.*$/MUTE/;			p; q }' -n
