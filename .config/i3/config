@@ -12,12 +12,12 @@ exec_always picom
 floating_modifier $mod
 
 # volumes
-bindsym $mod+plus	exec amixer set Master	5%+ && notify-send " $(gvol) (+5%)"
-bindsym $mod+minus	exec amixer set Master	5%- && notify-send " $(gvol) (-5%)"
-bindsym $mod+Shift+plus		exec amixer set Capture	5%+ && notify-send "  $(gvol Capture) (+5%)"
-bindsym $mod+Shift+minus	exec amixer set Capture	5%- && notify-send "  $(gvol Capture) (-5%)"
-bindsym $mod+backslash			exec amixer set Master	toggle && notify-send " $(gvol)"
-bindsym $mod+Shift+backslash	exec amixer set Capture	toggle && notify-send " $(gvol Capture)"
+bindsym $mod+plus				exec notify-send " $(vol Master 5%+) (+5%)"
+bindsym $mod+minus				exec notify-send " $(vol Master 5%-) (-5%)"
+bindsym $mod+backslash			exec notify-send " $(vol Master toggle)"
+bindsym $mod+Shift+plus			exec notify-send " $(vol Capture 5%+) (+5%)"
+bindsym $mod+Shift+minus		exec notify-send " $(vol Capture 5%-) (-5%)"
+bindsym $mod+Shift+backslash	exec notify-send " $(vol Capture toggle)"
 
 # start a terminal
 bindsym $mod+Return			exec alacritty 

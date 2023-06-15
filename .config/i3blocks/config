@@ -8,12 +8,12 @@ command=uptime -p
 interval=60
 
 [speaker volume]
-command=gvol
+command=vol
 label= 
 interval=10
 
 [mic volume]
-command=gvol Capture
+command=vol Capture
 label= 
 interval=10
 
