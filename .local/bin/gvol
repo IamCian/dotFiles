@@ -1,8 +1,11 @@
 #!/bin/sh
-# gvol - get volume of alsa control using amixer, with $1 as the control name,
-# defaulting to Master if blank
+# vol - get/set volume of alsa control using amixer
+# $1: control name (default is 'Master')
+# $2: set the volume to value (optional)
 
-amixer get \
-	$( [ -z "$1" ] && echo "Master" || echo "$1") \
-	| sed	-e '/\[on\]/	{ s/\].*//; s/.*\[//;	p; q }' \
-			-e '/\[off\]/	{ s/^.*$/MUTE/;			p; q }' -n
+amixer \
+	$( [ -z "$2" ] && echo "get"	|| echo "set" ) \
+	$( [ -z "$1" ] && echo "Master"	|| echo "$1" ) \
+	"$2" \
+	| sed -nE	-e '/\[on\]/	{ s/.*\[([0-9]+%)\].*/\1/;	p; q }' \
+				-e '/\[off\]/	{ s/.*/MUTE/;				p; q }' 
