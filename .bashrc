@@ -1,3 +1,9 @@
+#!/bin/bash
+# ~/.bashrc - run on each bash session
+
+# quit if non-interactive
+[[ $- != *i* ]] && return
+
 # used cached pywal colorscheme 
 (cat ~/.cache/wal/sequences &)
 
@@ -18,7 +24,10 @@ man() {
 # vim mode
 set -o vi
 
-# ailiases
+# disable history
+unset HISTFILE
+
+# aliases
 alias v="vim"
 alias r="ranger"
 alias z="zathura"

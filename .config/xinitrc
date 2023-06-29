@@ -1,0 +1,11 @@
+#!/bin/sh
+# ~/.config/xinitrc - run on startx
+
+# set error file
+ERRFILE="$XDG_CACHE_HOME/X11/xsession-errors"
+
+# start programs
+dunst &
+
+# start i3wm
+i3

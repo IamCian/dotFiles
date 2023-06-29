@@ -1,6 +1,9 @@
 #!/bin/sh
 # ~/.profile - run on login
 
+# run ~/.bashrc if it exists
+[ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
+
 # add ~/.local/bin to path
 export PATH="$PATH:$HOME/.local/bin"
 
@@ -20,6 +23,7 @@ export XDG_RUNTIME_DIR="/run/user/$UID"
 
 # config file locations
 export VIMINIT="source $XDG_CONFIG_HOME/vim/vimrc"
+export XINITRC="$XDG_CONFIG_HOME/xinitrc"
 export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtkrc"
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/pythonrc.py"
