@@ -1,0 +1,23 @@
+#!/bin/sh
+# ~/.config/x11 - run on startx
+
+# error file
+ERRFILE="$XDG_CACHE_HOME/X11/xsession-errors"
+
+# daemons
+picom --config	"$XDG_CONFIG_HOME/picom" &
+dunst -conf 	"$XDG_CONFIG_HOME/dunst" &
+nm-applet &
+redshift-gtk -c	"$XDG_CONFIG_HOME/redshift" &
+
+# wallpaper
+xwallpaper --zoom "$XDG_DATA_HOME/wall.png"
+
+# pywal theme
+wal -Rn &
+
+# auto-repeat
+xset r rate 300 50
+
+# start i3wm
+i3 -c "$XDG_CONFIG_HOME/i3"

@@ -1,6 +1,6 @@
 " use ~/.config/vim, see https://vi.stackexchange.com/a/20067
 set viminfofile=NONE
-set runtimepath+=$XDG_CONFIG_HOME/vim
+set runtimepath+=$XDG_DATA_HOME/vim
 
 " double-tap 'j' to enter normal mode
 inoremap jj <Esc>

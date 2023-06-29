@@ -22,15 +22,15 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_RUNTIME_DIR="/run/user/$UID"
 
 # config file locations
-export VIMINIT="source $XDG_CONFIG_HOME/vim/vimrc"
-export XINITRC="$XDG_CONFIG_HOME/xinitrc"
+export VIMINIT="source $XDG_CONFIG_HOME/vim"
+export XINITRC="$XDG_CONFIG_HOME/x11"
 export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch"
-export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtkrc"
-export PYTHONSTARTUP="$XDG_CONFIG_HOME/pythonrc.py"
-export WGETRC="$XDG_CONFIG_HOME/wgetrc"
-export MBSYNCRC="$XDG_CONFIG_HOME/mbsync/config"
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk"
+export PYTHONSTARTUP="$XDG_CONFIG_HOME/python"
+export WGETRC="$XDG_CONFIG_HOME/wget"
+export MBSYNCRC="$XDG_CONFIG_HOME/mbsync"
 export W3M_DIR="$XDG_CONFIG_HOME/w3m"
-export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npmrc"
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm"
 
 # local library locations 
 export GROFF_TMAC_PATH="$HOME/.local/lib/groff"
