@@ -1,13 +1,6 @@
 # set mod key to super ("windows key")
 set $mod Mod4
 
-# start applets
-exec --no-startup-id nm-applet
-exec redshift-gtk
-
-# start compositor 
-exec_always picom
-
 # drag floating windows with mouse+mod
 floating_modifier $mod
 
@@ -163,11 +156,8 @@ bar {
 		inactive_workspace	#2f3534d0	#222222d0	#888888d0
 		urgent_workspace	#2f343ac0	#2fd6b5c0	#ffffffc0
 		binding_mode		#2f343ac0	#900000c0	#ffffffc0
-    	}
+   	}
 }
-
-# set keyboard auto-repeat rate 
-exec_always xset r rate 300 50
 
 # keybinds
 bindsym $mod+x exec i3lock -i ~/.config/wall.png -t
@@ -191,9 +181,3 @@ client.focused			#a39c13		#a38c13		#a38c13		#a39c13		#a39c13
 client.unfocused		#316d9b		#316d9b		#316d9b		#316d9b		#316d9b		
 client.focused_inactive	#316d9b		#316d9b		#316d9b		#316d9b		#316d9b		
 client.urgent			#2f343a		#2f343a		#2f343a		#2f343a		#2f343a
-
-# set wallpaper
-exec xwallpaper --zoom ~/.config/wall.png
-
-# restore last pywal scheme 
-exec wal -R
