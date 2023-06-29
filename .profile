@@ -1,36 +1,49 @@
-# add .local/bin to path
-export PATH=$PATH:~/.local/bin
+#!/bin/sh
+# ~/.profile - run on login
 
-# defaults programs
+# add ~/.local/bin to path
+export PATH="$PATH:$HOME/.local/bin"
+
+# default programs
 export SHELL="bash"
 export PAGER="less"
 export EDITOR="vim"
 export VISUAL="vim"
 export BROWSER="brave"
 
-# default dirs
+# XDG dirs
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_RUNTIME_DIR="/run/user/$UID"
 
-# program dirs 
-export VIMINIT="source ~/.config/vim/vimrc"
-export GROFF_TMAC_PATH="$HOME/.local/share/groff/tmac"
-export XINITRC="${XDG_CONFIG_HOME:-$HOME/.config}/x11/xinitrc"
-export NOTMUCH_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/notmuch-config"
-export GTK2_RC_FILES="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-2.0/gtkrc-2.0"
+# config file locations
+export VIMINIT="source $XDG_CONFIG_HOME/vim/vimrc"
+export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch"
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtkrc"
+export PYTHONSTARTUP="$XDG_CONFIG_HOME/pythonrc.py"
+export WGETRC="$XDG_CONFIG_HOME/wgetrc"
+export MBSYNCRC="$XDG_CONFIG_HOME/mbsync/config"
+export W3M_DIR="$XDG_CONFIG_HOME/w3m"
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npmrc"
+
+# local library locations 
+export GROFF_TMAC_PATH="$HOME/.local/lib/groff"
+
+# program file locations
+export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
+export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+export ELECTRUMDIR="$XDG_DATA_HOME/electrum"
+export WINEPREFIX="$XDG_DATA_HOME/wine"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export GOPATH="$XDG_DATA_HOME/go"
+export IPFS_PATH="$XDG_DATA_HOME/ipfs"
+export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=$XDG_DATA_HOME/java"
+export MINETEST_USER_PATH="$XDG_DATA_HOME/minetest"
+
+# disable program history 
 export LESSHISTFILE="-"
-export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
-export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}/shell/inputrc"
-export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
-export WINEPREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/wineprefixes/default"
-export PASSWORD_STORE_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/password-store"
-export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
-export ANDROID_SDK_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/android"
-export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
-export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
-export ANSIBLE_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/ansible/ansible.cfg"
-export UNISON="${XDG_DATA_HOME:-$HOME/.local/share}/unison"
-export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/history"
-export MBSYNCRC="${XDG_CONFIG_HOME:-$HOME/.config}/mbsync/config"
-export ELECTRUMDIR="${XDG_DATA_HOME:-$HOME/.local/share}/electrum"
+export NODE_REPL_HISTORY=""
+export MYSQL_HISTFILE="/dev/null"

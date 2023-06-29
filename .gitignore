@@ -1,9 +1,10 @@
-# ignore everything
-/*
+# user dirs
+code/
+docs/
+music/
+pics/
+vids/
 
-# except
-!.config/
-!.local/bin/
-!.bashrc
-!.profile
-!.gitignore
+# program dirs
+.local/state
+.local/lib
