@@ -1,0 +1,12 @@
+#!/bin/awk -f
+# memu - print memory usage 
+
+BEGIN {
+    while (getline < "/proc/meminfo") {
+        if ($1 == "MemTotal:")  t=$2;
+        if ($1 == "MemAvailable:") {
+            printf "%.1fG/%.1fG\n", (t-$2)/1000000, t/1000000;
+            exit;
+        }
+    }
+}

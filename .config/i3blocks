@@ -1,10 +1,6 @@
-[name]
-command=echo $USER@$(hostname)
-label=  
-interval=once
-
 [uptime]
-command=uptime -p
+command=upt
+label= 
 interval=60
 
 [speaker volume]
@@ -18,25 +14,24 @@ label=
 interval=10
 
 [memory]
-command=sb-memory
+command=memu
 label= 
 interval=20
 
 [cpu]
-command=sb-cpu -t 5 -l  
-markup=pango
-interval=persist
+command=cpuse
+label= 
+interval=10
 
 [temperature]
-command=sb-temperature
+command=stemp k10temp amdgpu
 label=  
 interval=10
 
 [bandwidth]
-command=sb-bandwidth -B -s -t 5
+command=udld
 label= 
-markup=pango
-interval=persist
+interval=10
 
 [ip]
 command=hostname -i

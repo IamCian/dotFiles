@@ -1,0 +1,15 @@
+#!/bin/awk -f
+# cpuse - print average cpu usage since last run
+
+BEGIN {
+	getline < "/tmp/cpuse";
+	ou=$1; ot=$2;
+	while (getline < "/proc/stat") {
+		if ($1 == "cpu") {
+			u=$2+$3+$4+$7+$8+$9+$10+$11; t=u+$5+$6;
+			print u,t > "/tmp/cpuse";
+			printf "%i%%\n", ((u-ou)*100)/(t-ot);
+			exit;
+		}
+	}
+}

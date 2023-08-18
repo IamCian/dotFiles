@@ -1,0 +1,9 @@
+#!/bin/awk -f
+# upt - print uptime in short
+
+BEGIN {
+	getline < "/proc/uptime";
+	m=$1/60; h=0;
+	if (m >= 60) { h=int(m/60); m-=h*60; }
+	printf "%ih %im\n", h, m;
+}

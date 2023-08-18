@@ -1,0 +1,12 @@
+#!/bin/sh
+# stemp - print system/sensor temperature
+# $1: sensor name(s) (optional)
+
+for f in /sys/class/hwmon/hwmon*; do
+	paste "$f/name" "$f/temp1_input" 2>/dev/null
+done | if [ -z "$1" ]; then
+	awk '{printf "%s\t%i°C\n",$1,$2/1000}'
+else
+	awk -v n="$*" 'BEGIN {gsub(" ","|",n)} \
+		$1~n {printf "%i°C ",$2/1000} END {printf "\n"}'
+fi
