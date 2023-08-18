@@ -1,0 +1,22 @@
+#!/bin/sh
+# status - script for i3bar
+
+echo "{ \"version\": 1 }\n[[]"
+while :; do
+	echo ",["
+	printf "{\"full_text\":\"%s\"}," \
+		" $(upt)" \
+		" $(vol)" \
+		" $(vol Capture)" \
+		" $(memu)" \
+		" $(cpuse)" \
+		$(stemp k10temp amdgpu) \
+		" $(udld)" \
+		"$(hostname -i)" \
+		" $(date +%a)" \
+		" $(date +%d/%m/%y)" \
+		" $(date +%T)" \
+			| head -c -1
+	echo "]"
+	sleep 5 
+done

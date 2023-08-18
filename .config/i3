@@ -68,12 +68,12 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # workspaces
-set $ws1 "1: Primary"
-set $ws2 "2:   Browser"
-set $ws3 "3:   Internet"
-set $ws4 "4:   Files"
-set $ws5 "5:   Communication "
-set $ws6 "6:   Terminals"
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
@@ -131,23 +131,23 @@ mode "resize" {
 # status bar
 bar {
 	# font
-	font pango:LinLibertine Bold 10
+	font pango:LinLibertineBold, FontAwesome 11
 
 	# applet tray
 	tray_output DVI-D-0
 	
 	# commands
 	i3bar_command i3bar --transparency	
-	status_command i3blocks -c "$XDG_CONFIG_HOME/i3blocks"
+	status_command status 
 
 	# styling
 	height 25
-	workspace_min_width 80
+	workspace_min_width 55
 	separator_symbol " :||: "
 
 	# colors
 	colors {
-       	background	#2f3534b0
+       	background	#2f3534d0
 		statusline	#4eb6c4
 		separator	#ed63e1
 
