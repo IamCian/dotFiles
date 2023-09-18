@@ -21,6 +21,7 @@ bindsym $mod+Shift+q kill
 
 # rofi menu
 bindsym $mod+d exec rofi -show run -icon-theme "Papirus" -show-icons
+bindsym $mod+n exec spass sel rofi -dmenu
 
 # gaps
 gaps outer 2

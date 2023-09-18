@@ -37,7 +37,6 @@ export GROFF_TMAC_PATH="$HOME/.local/lib/groff"
 
 # program file locations
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
-export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export ELECTRUMDIR="$XDG_DATA_HOME/electrum"
 export WINEPREFIX="$XDG_DATA_HOME/wine"

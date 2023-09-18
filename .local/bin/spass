@@ -1,0 +1,81 @@
+#!/bin/sh
+# spass - simple, secure password storage and retrieval
+
+[ -z "$XDG_DATA_HOME" ]	&& XDG_DATA_HOME="$HOME/.local/share"
+[ -z "$PASSDIR" ]		&& PASSDIR="$XDG_DATA_HOME/pass"
+
+all()		{ basename -s ".gpg" -a "$PASSDIR"/*.gpg; }
+error()		{ echo "$(basename "$0"): error: $1" 1>&2; stty echo; exit; }
+format()	{ sed -n '/[^\S\r\n]/ { 1s/^/password: /; 2s/^/username: /; 3s/^/totp: /; 4s/^/notes: /; p }'; }
+
+if [ "$1" = "init" ]; then 
+	if [ -z "$2" ]
+		then error "gpg key not specified"
+		elif gpg -K "$2" >/dev/null 2>&1
+			then mkdir -p "$PASSDIR"; echo "$2" > "$PASSDIR/.gpg-id"
+			else error "gpg key doesn't exist"
+	fi;	exit
+elif [ -f "$PASSDIR/.gpg-id" ]
+	then GPG_ID="$(cat "$PASSDIR/.gpg-id")"
+	else error "password store not initialised!"
+fi; 
+
+show() {
+	[ ! -f "$PASSDIR/$1.gpg" ] && error "no such entry: $1"
+	gpg -dq "$PASSDIR/$1.gpg" | case "$2" in 
+		all)	format;;
+		notes)	sed -n 4p;;
+		totp)	sed -n 3p | oathtool --base32 --totp -;;
+		name)	sed -n 2p;;
+		*)		sed -n 1p;;
+	esac
+}
+
+dump() {
+	for f in $(all)
+		do printf "# %s\n%s\n\n" "$f" "$(show "$f" all)"
+	done | head -n -1;
+}
+
+add() { 
+	[ -z "$1" ] && error "entry name not specified"
+	printf "username: "; read -r u
+	stty -echo
+	printf "password: ";	read -r p1;	printf "\npassword (again): ";	read -r p2
+	printf "\ntotp: ";		read -r t1;	printf "\ntotp (again): ";		read -r t2
+	stty echo
+	printf "\nnotes: "; read -r n
+	[ "$p1" != "$p2" ] && error "passwords don't match"
+	[ "$t1" != "$t2" ] && error "totps don't match"
+	printf "%s\n%s\n%s\n%s" "$p1" "$u" "$t1" "$n" | gpg -eqr "$GPG_ID" -o "$PASSDIR/$1.gpg"
+}
+
+move() {
+	[ $# -lt 2 ] && error "source and destination not specified"
+	mv "$PASSDIR/$1.gpg" "$PASSDIR/$2.gpg"
+}
+
+remove () {
+	[ ! -f "$PASSDIR/$1.gpg" ] && error "entry does not exist: $1"
+	printf "are you sure you want to remove %s? [y/N] " $1; read -r c
+	[ "$c" = "y" ] || [ "$c" = "Y" ] && rm "$PASSDIR/$1.gpg" 
+}
+
+sel() {
+	[ -z "$1" ] && error "no menu program specified" 
+	ENTRY="$(all | $@)";								[ -z "$ENTRY" ]	&& exit
+	INFO="$(printf "pass\nname\ntotp\nnotes" | "$@")";	[ -z "$INFO" ]	&& exit
+	for p in $(pgrep "$(basename "$0")" | head -n -2); do kill "$p"; done
+	show "$ENTRY" "$INFO" | tr -d "\n" | xclip -selection clipboard
+	notify-send "$(basename "$0")" "$INFO copied to clipboard\nclearing in 10s"
+	sleep 10; xclip -selection clipboard < /dev/null
+}
+
+case "$1" in
+	mv)		shift; move "$@";;
+	rm)		shift; remove "$@";;
+	sel)	shift; sel "$@";;
+	add )	add	"$2";;
+	dump)	dump;;
+	*)		if [ -z "$1" ]; then all; else show "$@"; fi;;
+esac
