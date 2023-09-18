@@ -20,8 +20,8 @@ bindsym $mod+Shift+Return	exec alacritty --config-file "$XDG_CONFIG_HOME/alacrit
 bindsym $mod+Shift+q kill
 
 # rofi menu
-bindsym $mod+d exec rofi -show run -icon-theme "Papirus" -show-icons
-bindsym $mod+n exec spass sel rofi -dmenu
+bindsym $mod+d exec				rofi -show drun	-show-icons	-config "$XDG_CONFIG_HOME/rofi"
+bindsym $mod+n exec spass sel	rofi -dmenu -p "logins:"	-config "$XDG_CONFIG_HOME/rofi"
 
 # gaps
 gaps outer 2

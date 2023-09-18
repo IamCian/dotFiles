@@ -1,0 +1,25 @@
+// vim: ft=css
+
+configuration { display-drun: "Applications:"; }
+
+@theme "/dev/null"
+
+* {
+  lines:	10;
+  width:	400px;
+  spacing:	0;
+
+  bg:		rgb(30, 30, 45);	fg:		rgb(125, 130, 155);
+  bg-sel:	rgb(90, 90, 110);	fg-sel:	rgb(205, 215, 245);
+}
+
+window				{ background-color: @bg;		text-color: @fg;	 width: @width;  }
+mainbox				{ background-color: inherit;	text-color: inherit; }
+inputbar			{ background-color: @bg-sel; 	text-color: @fg-sel; children: [prompt, entry]; }
+prompt				{ background-color: inherit;	text-color: inherit; padding: 12px 0px 0px 12px; }
+entry				{ background-color: inherit;	text-color: inherit; padding: 12px; }
+listview			{ background-color: inherit;	text-color: inherit; lines: @lines; }
+element				{ background-color: inherit;	text-color: inherit; padding: 8px 12px 8px 12px; }
+element selected	{ background-color: @bg-sel;	text-color: @fg-sel; }
+element-text		{ background-color: inherit;	text-color: inherit; }
+element-icon		{ background-color: inherit;	text-color: inherit; padding: 0px 10px 0px 0px; size: 14px; }
