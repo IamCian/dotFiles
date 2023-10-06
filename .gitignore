@@ -8,3 +8,6 @@ vids/
 # program dirs
 .local/state
 .local/lib
+
+# files in other repos
+.local/bin/spass
