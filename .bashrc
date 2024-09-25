@@ -21,9 +21,6 @@ man() {
     command man "$@"
 }
 
-# vim mode
-set -o vi
-
 # disable history
 unset HISTFILE
 

@@ -22,6 +22,7 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_RUNTIME_DIR="/run/user/$UID"
 
 # config file locations
+export INPUTRC="$XDG_CONFIG_HOME/readline"
 export VIMINIT="source $XDG_CONFIG_HOME/vim"
 export XINITRC="$XDG_CONFIG_HOME/x11"
 export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch"
